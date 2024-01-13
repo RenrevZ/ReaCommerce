@@ -1,0 +1,235 @@
+.contain{
+    height: 70px;
+    border-bottom: 1px solid var(--White);
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+
+.container .navigation{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.container .navigation .mobile-menu{
+    display: none;
+}
+
+.main-navigation-item{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    overflow: scroll;
+}
+
+.navigation .icon-desktop img{
+    height: inherit;
+    width: inherit;
+    object-fit: contain;
+}
+
+.navigation .icon-desktop{
+    height: 50px;
+    width: 200px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+}
+
+
+.navigation .icon-desktop h5{
+   width: 100%;
+   font-size: 15px;
+}
+
+.navigation .icon-mobile{
+   display: none;
+}
+
+.navigation .icon-desktop .subheader{
+   position: relative;
+   top:1px;
+   font-weight: 700;
+}
+
+.profile{
+    display: flex;
+    justify-content: flex-end;
+    justify-self: self-end;
+    align-items: center;
+    position: relative;
+}
+
+.profile .profile-img{
+    height: 30px;
+    border-radius: 50%;
+    margin: 0px 30px;
+}
+
+.profile .profile-img img{
+    object-fit: cover;
+    height: inherit;
+    width:inherit;
+}
+
+/* CART */
+.profile .cart{
+    cursor: pointer;
+    position: relative;
+}
+
+.profile .cart img{
+    user-select: none;
+}
+
+.profile .cart .cart-items-length{
+    position: absolute;
+    right: -3px;
+    top: -4px;
+    padding: 0px 5px;
+    border-radius: 10px;
+    background-color: var(--Higlight);
+    color: var(--White);
+    font-weight: bold;
+    text-align: center;
+    font-size: 8px;
+    /* height: 10px;
+    width: 15px; */
+}
+
+.side-menu{
+    display: none;
+}
+
+@media(width <= 768px){
+
+    .contain .navigation{
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    .contain .navigation .main-navigation-item{
+        display: none;
+    }
+
+    .contain .navigation .mobile-menu{
+        display: block;
+    }
+
+    .side-menu{
+        position: fixed;
+        width: 100vw;
+        /* height: 100vh; */
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.3);
+        z-index: 10;
+        transition: width 0.5s ease;
+        overflow: auto;
+    }
+
+    .side-menu.active{
+        display: block;
+    }
+
+    .side-menu .main-menu{
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 70px;
+        padding: 0px 10px;
+        gap: 10px;
+        width: 70%;
+        background-color: var(--White);
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        animation: slide 0.5s ease;
+        overflow: auto;
+    }
+
+    .side-menu .main-menu .close-icon{
+        position: sticky;
+        top: 0;
+        display: flex;
+        align-items: center;
+        z-index: 30;
+        height: 100%;
+        width: 100%;
+        padding: 0px 10px;
+        background-color: var(--White);
+    }
+
+    .side-menu .main-menu ul{
+        padding: 0px 10px;
+        line-height: 3;
+        list-style: none;
+    }
+
+    .side-menu .main-menu ul{
+      font-weight: 700;
+    }
+
+    .side-menu .main-menu ul li a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        /* border-radius: 10px; */
+        box-shadow: 8px 5px 1px rgba(12,236,169,0.329);
+        height: 30px;
+        border: 1px solid rgba(12,236,169,0.329);
+        background-color: var(--White);
+        text-decoration: none;
+        color: var(--Dark-grayish-blue);
+        position: relative;
+    }
+}
+
+@media(width <= 320px){
+    .navigation .icon-desktop{
+        display: none;
+    }
+
+    .navigation .icon-mobile{
+        display: block;
+        height: 30px;
+        /* width: 30px; */
+    }
+
+    .navigation .icon-mobile img{
+        width: inherit;
+        height: inherit;
+        object-fit: cover;
+    }
+
+}
+
+@keyframes slide {
+    from{
+        width: 0%;
+    }to{
+        width: 50%;
+    }
+}
+
+@keyframes slideOut {
+    from{
+        width: 50%;
+    }to{
+        width: 0%;
+    }
+}

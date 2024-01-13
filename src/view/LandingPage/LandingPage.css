@@ -1,0 +1,41 @@
+.landing-page-container {
+    display: grid;
+    grid-template-columns: 100%;
+    position: relative;
+    justify-content: start;
+    align-items: start;
+    margin-top: 30px;
+    column-gap: 50px;
+    margin: 0px 30px;
+}
+
+.header-background{
+    height: 10px;
+    width: 30px;
+    padding: 5px;
+    rotate: -20deg;
+    background-color: rgba(97, 218, 251, 0.7);
+    position: absolute;
+    top: 0;
+    left: -10px;
+    z-index: -1;
+    animation: slide 0.5s ease;
+}
+
+.main-products-header{
+    position: relative;
+    margin-bottom: 30px;
+    color: var(--White);
+}
+
+@keyframes slide {
+    from {
+         width: 0;
+         padding: 0;
+    }
+    to {
+        
+         width: 30px;
+         padding: 5px;
+    }
+}
