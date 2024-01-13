@@ -4,27 +4,50 @@ import './Categories.css'
 // ASSETS
 import leftArrowIcon from '../../assets/left-icon.svg'
 import rightArrowIcon from '../../assets/rigth-icon.svg'
+import { NavLink } from 'react-router-dom'
 
 
-const scrollLeft = () => console.log('left')
-const scrollRight = () => console.log('scrollRight')
 
 interface categories {
     categories : Array<string>
 }
 
 export default function Categories({ categories } : categories) {
-  const categoriesContainer = useRef(null)
+  const categoriesContainer = useRef<HTMLUListElement | null>(null)
   
+  
+ const scrollLeft = () : void => {
+    if (!categoriesContainer.current) {
+        console.log('categoriesContainer is null');
+        return; // Guard clause to exit early if null
+      }
+    
+    categoriesContainer.current.scrollLeft += (-200);
+ }
+
+
+ const scrollRight = () : void => {
+    if (!categoriesContainer.current) {
+        console.log('categoriesContainer is null');
+        return; // Guard clause to exit early if null
+      }
+    
+    categoriesContainer.current.scrollLeft += 200;
+ }
+
+  // LIST FOR CATEGORIES  
   const CategoryList = (categories : Array<string>) => {
     return (
         categories.map(category => (
-            <li key={category}>{category}</li>
+            <NavLink to={`product/category/${category}`}>
+                <li key={category}>{category}</li>
+            </NavLink>
         ))
     )
   }
+
   return (
-         <div className="main-navigation-item">
+      <div className="main-container">
 
             <div className="categories-header">
 
@@ -51,9 +74,7 @@ export default function Categories({ categories } : categories) {
             
             {/* CATEGORY LIST */}
            <ul  ref={ categoriesContainer }>
-                  {
-                    CategoryList(categories)
-                  }
+                  { CategoryList(categories) } 
             </ul> 
      </div>
   )

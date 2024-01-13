@@ -4,6 +4,7 @@ import './LandingPage.css'
 
 // DATA
 import { Productreducer,getProducts,getCategories } from '../../store/productStore'
+import Products from '../../components/Products/Products';
 
 const LandingPage = () => {
   interface AppState {
@@ -11,7 +12,7 @@ const LandingPage = () => {
     categories: Object; // Adjust the type according to the actual type of 'categories'
   }
 
-  const [state, dispatch] = useReducer(Productreducer, { product: {}, categories: [] });
+  const [state, dispatch] = useReducer(Productreducer, { product: [], categories: [] });
 
   const loadProduct = async () => {
     await getProducts(dispatch)
@@ -22,7 +23,7 @@ const LandingPage = () => {
   }
 
   const getCategory = () => {
-     console.log(state.categories)
+     console.log(state.product)
   }
   
   useEffect(() => {
@@ -35,14 +36,14 @@ const LandingPage = () => {
         
           {/* CATEGORIES  */}
           <Categories categories={state.categories}/>
-          
+
           <div className="main-products-header">
                   <span className="header-background"></span>
                   <h4>All Products</h4>
           </div>
 
           {/*  MAIN PRODUCT */}
-          {/* <Product  :productItem="productItem"/> */}
+          <Products products={state.product}/>
     </div>
   );
 };

@@ -107,6 +107,10 @@
     cursor: pointer;
 }
 
+.cart-container .cart-checkout-btn button.checkout-btn:hover{
+    background-color: var(--Higlight);
+}
+
 .item-remove-btn img{
     cursor: pointer;
 }
