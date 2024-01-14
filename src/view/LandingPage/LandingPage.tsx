@@ -7,11 +7,6 @@ import { Productreducer,getProducts,getCategories } from '../../store/productSto
 import Products from '../../components/Products/Products';
 
 const LandingPage = () => {
-  interface AppState {
-    product: Object; // Adjust the type according to the actual type of 'product'
-    categories: Object; // Adjust the type according to the actual type of 'categories'
-  }
-
   const [state, dispatch] = useReducer(Productreducer, { product: [], categories: [] });
 
   const loadProduct = async () => {
@@ -22,10 +17,6 @@ const LandingPage = () => {
     await getCategories(dispatch)
   }
 
-  const getCategory = () => {
-     console.log(state.product)
-  }
-  
   useEffect(() => {
     loadProduct()
     ProductCategories()

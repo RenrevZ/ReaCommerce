@@ -8,9 +8,10 @@ const ACTIONS = {
 }
 
 interface reducerType {
-    product : Object,
+    product : Array<any> | any,
     categories : Array<string>
 }
+
 
 const Productreducer = (state : any, action : any) : reducerType => {
     switch(action.type){
@@ -27,7 +28,7 @@ const Productreducer = (state : any, action : any) : reducerType => {
     }
 }
 
-const getProducts = async (dispatch : Function)  => {
+const getProducts = async (dispatch : Function) : Promise<void>  => {
     try{
         const response: { data : any } = await axios.get('https://dummyjson.com/products?limit=100')
         const responseData: any = await response.data.products;
@@ -39,7 +40,7 @@ const getProducts = async (dispatch : Function)  => {
     }
 }
 
-const getSingleProduct = async (id : number,dispatch : Function)  => {
+const getSingleProduct = async (id : number,dispatch : Function) : Promise<void> => {
     try{
         const response: { data : any } = await axios.get(`https://dummyjson.com/products/${id}`)
         const responseData: any = await response.data;
@@ -51,7 +52,7 @@ const getSingleProduct = async (id : number,dispatch : Function)  => {
     }
 }
 
-const getCategories = async (dispatch : Function)  => {
+const getCategories = async (dispatch : Function) : Promise<void>  => {
     try{
         const response: { data : any } = await axios.get('https://dummyjson.com/products/categories')
         const responseData: any = await response.data;
@@ -63,7 +64,7 @@ const getCategories = async (dispatch : Function)  => {
     }
 }
 
-const getSingleCategories = async (category : string | number,dispatch : Function)  => {
+const getSingleCategories = async (category : string | number,dispatch : Function) : Promise<void> => {
     try{
         const response: { data : any } = await axios.get(`https://dummyjson.com/products/category/${category}`)
         const responseData: any = await response.data.products;

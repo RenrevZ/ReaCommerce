@@ -1,0 +1,33 @@
+.range-btn{
+    width: 100%;
+    height: 100%;
+    background-color: var(--Secondary);
+    display: grid;
+    grid-template-columns: 5px 15px 5px;
+    gap:10px;
+    align-items: center;
+    justify-content: space-around;
+    user-select: none;
+    border-radius: 10px;
+    color: var(--White);
+}
+
+.range-btn .minus-btn{
+    cursor: pointer;
+    position: relative;
+    top: -3px;
+}
+
+.range-btn .minus-btn:active,
+.range-btn .plus-btn:active{
+   scale: 0.8;
+}
+
+
+.range-btn .item-value{
+    padding: 0px 10px;
+}
+
+.range-btn .plus-btn{
+    cursor: pointer;
+}

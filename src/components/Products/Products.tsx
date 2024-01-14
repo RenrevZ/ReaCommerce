@@ -1,17 +1,28 @@
 import { NavLink } from 'react-router-dom'
 import './Product.css'
 
-interface productType {
-    product : Object
+interface ProductType {
+    id: number;
+    price: number;
+    brand: string;
+    title: string;
+    rating: number;
+    discountPercentage: Float32Array;
+    thumbnail: string; // Assuming you have a 'thumbnail' property
 }
-export default function Products({ products } : any) {
+  
+interface ProductsProps {
+   products: ProductType[];
+}
+
+export default function Products({ products  } : ProductsProps)  {
 
   
   return (
     <div className="main-products">
         <div className="product-container">
          {
-            products.map((product : any) => (
+            products.map((product : ProductType) => (
 
                 <NavLink to={`product/${product.id}`} className="product">
                     {
