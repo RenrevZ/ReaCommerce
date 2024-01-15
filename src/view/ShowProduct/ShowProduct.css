@@ -121,6 +121,12 @@
     text-decoration: line-through;
 }
 
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .btn-container .cart-column{
     width: 100%;
@@ -293,6 +299,36 @@
 
 .product-slideshow > .main-item > .image-container > .image-thumbnail .thumbnail.current img{
    opacity: 1;
+}
+
+.alert-container{
+    width:300px;
+    /* position: absolute;
+    right: 30px;
+    top: 100px; */
+    animation: slide 0.3s ease;
+    z-index: 10000;
+    margin-bottom: 10px;
+}
+
+.alert-container .alert{
+    width: inherit;
+    background-color: #61dafbe5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color:var(--Primary);
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+@keyframes slide {
+    from{
+        right: 0;
+    }to{
+        right: 30px;
+    }
 }
 
 @media(width <= 768px){

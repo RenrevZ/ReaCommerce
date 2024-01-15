@@ -4,7 +4,7 @@ import './Categories.css'
 // ASSETS
 import leftArrowIcon from '../../assets/left-icon.svg'
 import rightArrowIcon from '../../assets/rigth-icon.svg'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 
@@ -39,9 +39,9 @@ export default function Categories({ categories } : categories) {
   const CategoryList = (categories : Array<string>) => {
     return (
         categories.map(category => (
-            <NavLink to={`product/category/${category}`}>
-                <li key={category}>{category}</li>
-            </NavLink>
+            <Link to={`/product/category/${category}`} key={ category }>
+                <li>{ category }</li>
+            </Link>
         ))
     )
   }

@@ -34,7 +34,7 @@
 }
 
 .cart-container .cart-items .item-container{
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid var(--Higlight);
     padding: 10px;
 }
 
@@ -45,7 +45,7 @@
 
 .cart-container .cart-items::-webkit-scrollbar-thumb {
     /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3); */
-    background-color: rgba(31, 30, 30, 0.1);
+    background-color: rgba(53, 151, 168, 0.521);
 }
 
 

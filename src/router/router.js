@@ -4,7 +4,7 @@ import {
     Route,
   } from "react-router-dom";
 
-import ShowSingleCategories from "../view/ShowSingleCategories.tsx";
+import ShowSingleCategories from "../view/ShowCategories/ShowSingleCategories.tsx";
 import Layout from "../layout/Layout.jsx";
 import ShowProduct from "../view/ShowProduct/ShowProduct.tsx";
 import LandingPage from "../view/LandingPage/LandingPage.tsx";

@@ -1,6 +1,10 @@
 // COMPONENTS
 import { NavLink } from "react-router-dom";
 import Cart from "../Cart/Cart";
+import { Link } from 'react-router-dom'
+
+// DATA
+import { Productreducer,getCategories } from '../../store/productStore'
 
 // CSS
 import './Navbar.css'
@@ -10,23 +14,47 @@ import iconMenu from '../../assets/icon-menu.svg'
 import logo from '../../logo.svg'
 import cartIcon from '../../assets/cart-white.svg'
 import avatarIcon from '../../assets/image-avatar.png'
-import { useRef } from 'react';
-
+import { useEffect, useReducer, useRef, useState } from 'react';
+import {CartGlobalState} from '../../store/CartStore'
+import closeIcon from '../../assets/icon-close.svg'
+ 
 export default function Navbar() {
-      
+  const [state, dispatch] = useReducer(Productreducer, { product: [], categories: [] });
+
   const containers  = {
       sideMenuContainer: useRef<HTMLDivElement>(null),
       cartContainer:useRef<HTMLDivElement>(null)
   }
 
-//   const ToggleClass = () => {}
+  const [isSideMenuOpen,setisSideMenuOpen] = useState(false)
 
-  const OpenSideMenu = () => console.log('asdsadsa')
+  const { GlobalState, Globaldispatch } = CartGlobalState();
+
+  const OpenSideMenu = () => setisSideMenuOpen(true)
   const toggleCart = () => {
-    console.log('click')
     containers.cartContainer.current !== null && containers.cartContainer.current.classList.toggle('active')
   }
-  const CloseSideMenu = () => console.log('asdsadsa')
+  const CloseSideMenu = () => setisSideMenuOpen(false)
+
+  const ProductCategories = async () => {
+     await getCategories(dispatch)
+  }
+
+
+  useEffect(() => {
+    ProductCategories()
+  },[])
+
+   // LIST FOR CATEGORIES  
+   const CategoryList = (categories : Array<string>) => {
+    return (
+        categories.map(category => (
+            <Link to={`/product/category/${category}`} key={ category } onClick={CloseSideMenu}>
+                <li>{ category }</li>
+            </Link>
+        ))
+    )
+  }
 
   return (
     <div className="contain">
@@ -39,16 +67,18 @@ export default function Navbar() {
                     onClick={ OpenSideMenu }/>
             </div>
 
-            <NavLink  to="/" className='icon-desktop'>
+            <Link  to="/" className='icon-desktop'>
                 <img src={ logo }
                      alt="" />
                 <h5>Reacommerce</h5>
-            </NavLink>
+            </Link>
 
-            <div className="icon-mobile">
-                <img src={ iconMenu } 
-                     alt="" />
-            </div>
+            <Link  to="/">
+                <div className="icon-mobile">
+                        <img src={ logo } 
+                            alt="" />
+                </div>
+            </Link>
         </div>
         
         {/* CART */}
@@ -56,7 +86,7 @@ export default function Navbar() {
             <div className="cart" onClick={ toggleCart }>
                 {/* cart length */}
                 <span className="cart-items-length">
-                    3
+                    {GlobalState.cartLength} 
                 </span>
 
                 {/* cart icon */}
@@ -72,26 +102,22 @@ export default function Navbar() {
             </div>
 
             {/* CART CONTAINER */}
-            <Cart  ref={ containers.cartContainer} />
+            <Cart  ref={ containers.cartContainer} cartItems={GlobalState.cartItems}/>
         </div>
 
         {/*  SIDEMENU */}
-        <div className="side-menu" ref={ containers.sideMenuContainer } >
+        <div className={`side-menu ${isSideMenuOpen && 'active'}`} ref={ containers.sideMenuContainer } >
             <div className="main-menu">
 
                 <div className="close-icon" >
-                    <img src="../assets/close-icon-black.svg" 
+                    <img src={closeIcon}
                          alt=""
                          onClick={ CloseSideMenu } />
                 </div>
 
                 <div className="link-items">
                     <ul>
-                        {/* <li v-for="category in productCategory" :key="category">
-                            <router-link :to="{name:'ShowProductCategories',params:{category:category}}">
-                            {{  category }}
-                            </router-link>
-                        </li> */}
+                      {CategoryList(state.categories)}
                     </ul>
                 </div>
 

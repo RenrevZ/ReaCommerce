@@ -1,10 +1,13 @@
+// COMPONENTS
 import { useEffect, useReducer } from 'react';
-import Categories from '../../components/Categories/Categories'
 import './LandingPage.css'
+import Categories from '../../components/Categories/Categories'
+import Products from '../../components/Products/Products';
 
 // DATA
 import { Productreducer,getProducts,getCategories } from '../../store/productStore'
-import Products from '../../components/Products/Products';
+
+
 
 const LandingPage = () => {
   const [state, dispatch] = useReducer(Productreducer, { product: [], categories: [] });

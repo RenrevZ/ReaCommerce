@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Product.css'
 
 interface ProductType {
@@ -24,7 +24,7 @@ export default function Products({ products  } : ProductsProps)  {
          {
             products.map((product : ProductType) => (
 
-                <NavLink to={`product/${product.id}`} className="product">
+                <Link to={`/product/${product.id}`} key={product.id} className="product">
                     {
                      product.price <= 100 &&  
                      <div className="lowest-guarantee">
@@ -62,7 +62,7 @@ export default function Products({ products  } : ProductsProps)  {
                             ${product.discountPercentage}
                         </div>
                     </div>
-                </NavLink>
+                </Link>
             ))
             
            }

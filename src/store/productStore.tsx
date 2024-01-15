@@ -22,7 +22,7 @@ const Productreducer = (state : any, action : any) : reducerType => {
         case ACTIONS.GET_CATEGORIES :
                return { ...state,categories : action.categories }
         case ACTIONS.GET_SINGLE_CATEGORY :
-               return { ...state,categories : action.singleCategories }
+               return { ...state,product : action.singleCategories }
         default:
               return state
     }
@@ -37,6 +37,7 @@ const getProducts = async (dispatch : Function) : Promise<void>  => {
 
     }catch (error) {
         console.error('Error fetching Products:', error);
+        window.location.reload()
     }
 }
 
@@ -49,6 +50,7 @@ const getSingleProduct = async (id : number,dispatch : Function) : Promise<void>
 
     }catch (error) {
         console.error('Error fetching data single Product:', error);
+        window.location.reload()
     }
 }
 
@@ -61,6 +63,7 @@ const getCategories = async (dispatch : Function) : Promise<void>  => {
 
     }catch (error) {
         console.error('Error fetching data single Product:', error);
+        window.location.reload()
     }
 }
 
@@ -73,6 +76,7 @@ const getSingleCategories = async (category : string | number,dispatch : Functio
 
     }catch (error) {
         console.error('Error fetching data single Product:', error);
+        window.location.reload()
     }
 }
 

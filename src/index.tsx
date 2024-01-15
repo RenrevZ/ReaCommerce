@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from "react-router-dom";
 import { router } from './router/router'
+import {CartGlobalStateProvider} from './store/CartStore'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-   <RouterProvider router={router} />
+    <CartGlobalStateProvider>
+          <RouterProvider router={router} />
+   </CartGlobalStateProvider>
   </React.StrictMode>
 );
 

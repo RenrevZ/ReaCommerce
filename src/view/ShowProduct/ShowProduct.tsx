@@ -7,9 +7,10 @@ import CloseIcon from '../../assets/icon-close.svg'
 import PreviousIcon from '../../assets/icon-previous.svg'
 import NextIcon from '../../assets/icon-next.svg'
 import {addToCart,Cartreducer} from '../../store/CartStore'
+import { CartGlobalState } from '../../store/CartStore'
 
 // DATA
-import {getSingleProduct,Productreducer} from '../../store/productStore'
+import { getSingleProduct,Productreducer } from '../../store/productStore'
 import { useParams } from 'react-router-dom'
 
 export default function ShowProduct() {
@@ -28,12 +29,16 @@ export default function ShowProduct() {
     await getSingleProduct(Number(id),dispatch)
   }
 
+  // SUCCESS MESSAGE LOGIC
+   const [isAdded,setIsAdded] = useState<boolean>(false)
+   const [isAlreadyAdded,setisAlreadyAdded] = useState<boolean>(false)
+
   // RANGE BUTTON
-  const [RangeValue,setRangeValue] = useState(0)
+  const [RangeValue,setRangeValue] = useState<number>(1)
 
   // DESKTOP IMAGE TOGGLE
-  const [currentSelectedIndex,setCurrentSelectedIndex] = useState(0)
-  const [isSlideShowActive,setisSlideShowActive] = useState(false)
+  const [currentSelectedIndex,setCurrentSelectedIndex] = useState<number>(0)
+  const [isSlideShowActive,setisSlideShowActive] = useState<boolean>(false)
 
   
 
@@ -55,10 +60,8 @@ export default function ShowProduct() {
   const mobileNext = () => currentSelectedIndex !== state.product.images.length -1 && setCurrentSelectedIndex(currentSelectedIndex + 1)
  
   // ADD TO CART FUNCTION
-  const [cartState,cartDispatch] = useReducer(Cartreducer,{cartItems : [] , orderTotal : 0})
-
+  const { GlobalState, Globaldispatch } = CartGlobalState();
  
-
   const AddToCart = async () => {
     const FormData = {
       merge: true,
@@ -70,9 +73,15 @@ export default function ShowProduct() {
         }
       ]
     }
+    const isAlreadyOnCart = GlobalState.cartIdArray.some((arrayId : number) => arrayId === Number(id));
 
-    await addToCart(FormData,cartDispatch)
-    console.log('items in cart:',cartState.cartItems,'order total:',cartState.orderTotal)
+    if(isAlreadyOnCart){
+      setisAlreadyAdded(true)
+    }else{
+      await addToCart(FormData,Globaldispatch)
+      Globaldispatch({type: 'addItemIdToArray',cartId:Number(id)})
+      setIsAdded(true)
+    }
   }
   
   
@@ -92,6 +101,23 @@ export default function ShowProduct() {
        changeContainerImage(container.mobileImageContainer,state.product.images[currentSelectedIndex])
     }
   })
+
+  useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        setIsAdded(false);
+      }, 2000);
+    
+      return () => clearTimeout(timeoutId);
+  }, [isAdded]);
+
+  useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        setisAlreadyAdded(false);
+      }, 2000);
+    
+      return () => clearTimeout(timeoutId);
+  }, [isAlreadyAdded]);
+  
 
   return (
     <div className="show-product-container">
@@ -160,24 +186,48 @@ export default function ShowProduct() {
           </div>
 
           <div className="btn-container">
+            {/* ALERT SUCCESS MESSAGE */}
+            {
+              isAdded && !isAlreadyAdded &&
+                <div className="alert-container">
+                  <div className="alert">
+                    <div className="left">
+                      added to your cart successfully
+                    </div>
+                  </div>
+                </div>
+            }
 
+            {
+              isAlreadyAdded &&
+                <div className="alert-container">
+                  <div className="alert">
+                    <div className="left">
+                      item is already on your cart
+                    </div>
+                  </div>
+                </div>
+            }
+
+            
             <div className="cart-column">
               
-              {/* RANGE INPUT BUTTON */}
-              <RangeBtn itemValue={ RangeValue } 
-                          decrementValue={ () => RangeValue !== 0 && setRangeValue(RangeValue - 1)} 
-                          incrementValue={ () => setRangeValue(RangeValue + 1)}/>
+                {/* RANGE INPUT BUTTON */}
+                <RangeBtn itemValue={ RangeValue } 
+                            decrementValue={ () => RangeValue !== 0 && setRangeValue(RangeValue - 1)} 
+                            incrementValue={ () => setRangeValue(RangeValue + 1)}/>
 
 
-              <div className="addToCart-btn">
-                
-                {/* ADD TO CART BUTTON */}
-                <button className="btn-add-cart" onClick={AddToCart}>
-                  <img src="../assets/cart-white.svg" alt="" className="btn-icon" />
-                  Add to cart
-                </button>
+                <div className="addToCart-btn">
+                  
+                  {/* ADD TO CART BUTTON */}
+                  <button className="btn-add-cart" onClick={AddToCart}>
+                    <img src="../assets/cart-white.svg" alt="" className="btn-icon" />
+                    Add to cart
+                  </button>
 
-              </div>
+                </div>
+
             </div>
 
         </div>

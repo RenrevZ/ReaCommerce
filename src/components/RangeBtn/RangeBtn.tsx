@@ -7,7 +7,7 @@ interface RangeBtnType{
     decrementValue : () => void
     incrementValue :  () => void
 }
-export default function RangeBtn({itemValue = 0,decrementValue,incrementValue} : RangeBtnType)  {
+export default function RangeBtn({itemValue = 1,decrementValue,incrementValue} : RangeBtnType)  {
   return (
     <div className="range-btn">
 
