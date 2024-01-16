@@ -8,6 +8,7 @@ import PreviousIcon from '../../assets/icon-previous.svg'
 import NextIcon from '../../assets/icon-next.svg'
 import {addToCart,Cartreducer} from '../../store/CartStore'
 import { CartGlobalState } from '../../store/CartStore'
+import { ThumbnailLoader } from '../../components/cardLoader/CardLoader'
 
 // DATA
 import { getSingleProduct,Productreducer } from '../../store/productStore'
@@ -32,6 +33,9 @@ export default function ShowProduct() {
   // SUCCESS MESSAGE LOGIC
    const [isAdded,setIsAdded] = useState<boolean>(false)
    const [isAlreadyAdded,setisAlreadyAdded] = useState<boolean>(false)
+  
+  //  THUMBNAIL LOADER
+  const [isThumnailLoading,setisThumbnailLoading] = useState<boolean>(true)
 
   // RANGE BUTTON
   const [RangeValue,setRangeValue] = useState<number>(1)
@@ -87,6 +91,7 @@ export default function ShowProduct() {
   
   useEffect(() => {
     loadCategories(dispatch)
+                  .finally(() => setisThumbnailLoading(false))
 
     // CHANGE THE IMAGE CONTAINER BACKGROUND TO THUMBNAIL ONLOAD
     if (state.product.images && state.product.images.length > 0 && container.imageContainer.current) {
@@ -131,9 +136,13 @@ export default function ShowProduct() {
             </div>
 
             <div className="image-thumbnail">
+              {
+                isThumnailLoading ? <ThumbnailLoader />
+                :
                 <Thumbnail images={state.product.images}  
                            changeHeaderPhoto={changeHeaderPhoto} 
                            selectedIndex={currentSelectedIndex}/>
+              }
             </div>
 
         </div>
@@ -153,10 +162,13 @@ export default function ShowProduct() {
                 </div>
                 
             </div>
-
-            <Thumbnail images={state.product.images} 
-                       changeHeaderPhoto={changeHeaderPhoto}
-                       selectedIndex={currentSelectedIndex}/>
+            {
+                isThumnailLoading ? <ThumbnailLoader />
+                :
+                <Thumbnail images={state.product.images} 
+                          changeHeaderPhoto={changeHeaderPhoto}
+                          selectedIndex={currentSelectedIndex}/>
+            }
         </div>
 
         {/* PRODUCT DETAILS */}

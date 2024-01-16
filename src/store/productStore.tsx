@@ -37,7 +37,6 @@ const getProducts = async (dispatch : Function) : Promise<void>  => {
 
     }catch (error) {
         console.error('Error fetching Products:', error);
-        window.location.reload()
     }
 }
 
@@ -50,7 +49,6 @@ const getSingleProduct = async (id : number,dispatch : Function) : Promise<void>
 
     }catch (error) {
         console.error('Error fetching data single Product:', error);
-        window.location.reload()
     }
 }
 
@@ -63,7 +61,6 @@ const getCategories = async (dispatch : Function) : Promise<void>  => {
 
     }catch (error) {
         console.error('Error fetching data single Product:', error);
-        window.location.reload()
     }
 }
 
@@ -76,7 +73,6 @@ const getSingleCategories = async (category : string | number,dispatch : Functio
 
     }catch (error) {
         console.error('Error fetching data single Product:', error);
-        window.location.reload()
     }
 }
 

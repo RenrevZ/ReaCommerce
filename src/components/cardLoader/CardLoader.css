@@ -1,0 +1,91 @@
+  .loader-container {
+    display: grid;
+    grid-template-columns: repeat(4,auto);
+    gap: 20px;
+    /* justify-content: center;
+    align-items: center; */
+    margin: 20px;
+  }
+  
+  .loader-container .card{
+    width: 200px;
+    background: var(--Secondary);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 8px 5px 1px rgba(97, 218, 251, 0.3);
+  }
+
+  .loader-container .card-category {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    background: var(--Secondary);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 8px 5px 1px rgba(97, 218, 251, 0.3);
+  }
+
+  .loader-container .card-category .card__image{
+    width: 185px;
+    height: 20px;
+  }
+
+  .thumbnail-container{
+    display: grid;
+    grid-template-columns: repeat(4,auto);
+    gap: 35px;
+  }
+
+  .thumbnail-container .card{
+    height: 85px;
+    width:85px;
+    border-radius: 10px;
+    background-color: var(--Secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .thumbnail-container .card-category .card__image{
+      width: 100%;
+      height: 20px;
+      padding: 40px;
+      background: linear-gradient(110deg, #41afda94 8%, #40b5d87c 18%, #25b1ca70 33%);
+      background-size: 200% 100%;
+      animation: 1s shine linear infinite;
+  }
+  
+  @keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
+  
+  .loader-container .card__image,
+  .loader-container h2,
+  .loader-container p {
+    background: linear-gradient(110deg, #41afda94 8%, #40b5d87c 18%, #25b1ca70 33%);
+    border-radius: 10px;
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
+  }
+  
+  .loader-container .card__image {
+    height: 200px;
+    margin: 10px;
+  }
+  
+  .loader-container .card__content {
+    padding: 20px;
+  }
+  
+  .loader-container h2 {
+    height: 30px;
+  }
+  
+  .loader-container p {
+    height: 70px;
+    margin-top: 10px;
+    width: 80%;
+  }
