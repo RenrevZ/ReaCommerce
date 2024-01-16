@@ -198,6 +198,17 @@
     }
 }
 
+@media(width <= 425px){
+    .navigation .icon-desktop{
+        height: 50px;
+        width: 150px;
+        object-fit: cover;
+        display: flex;
+        align-items: center;
+        font-size: 25px;
+    }
+}
+
 @media(width <= 320px){
     .navigation .icon-desktop{
         display: none;

@@ -89,3 +89,20 @@
     margin-top: 10px;
     width: 80%;
   }
+
+  @media (width <= 768px) {
+    .loader-container {
+      grid-template-columns: repeat(3,auto);
+    }
+    
+  }
+
+  @media (width <= 425px) {
+    .loader-container {
+      grid-template-columns: repeat(2,auto);
+    }
+
+    .loader-container .card {
+      width: 150px;
+    }
+  }
